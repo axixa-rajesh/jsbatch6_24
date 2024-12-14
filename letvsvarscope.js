@@ -1,6 +1,7 @@
 //let scope is block level {} and function level both
 // var scope is function level
 var x = 10;
+
 {
     console.log(x); 
     var x = 20; //var x is redeclare
