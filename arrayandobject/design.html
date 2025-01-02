@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="mb-3">
+            <button class="btn btn-success" onclick="go()">
+            Add +
+         </button>
+    <div id="insert"  style="display: none;">
+        <div class="row mt-4">
+            <div class="col-2 border  text-center"><b> Name</b> </div>
+            <div class="col-2 border  text-center"><b> Description</b> </div>
+            <div class="col-2 border  text-center"><b> Price</b></div>
+            <div class="col-2 border  text-center"><b> Discount</b></div>
+            <div class="col-2 border  text-center"><b> Final Price</b></div>
+            <div class="col-2 border  text-center"><b>Save</b></div>
+            <div class="col-2 border  text-center p-2"><input type="text" id="names"></div>
+            <div class="col-2 border  text-center p-2"><input type="text" id="description"></div>
+            <div class="col-2 border  text-center p-2"><input type="number" id="price" onkeyup="cal()" ></div>
+            <div class="col-2 border  text-center p-2"><input type="number" id="discount" onkeyup="cal()"></div>
+            <div class="col-2 border  text-center p-2"><input type="number" id="fp" readonly></div>
+            <div class="col-2 border  text-center p-2"><button class="btn btn-primary" onclick="save()">Save</button> </div>
+            
+        </div>
+    </div>
+    </div>
+    
+        <div class="row">
+            <div class="col-2 border  text-center "><b>S.No.</b></div>
+            <div class="col-2 border  text-center"><b> Name</b> </div>
+            <div class="col-2 border  text-center"><b> Description</b> </div>
+            <div class="col-2 border  text-center"><b> Price</b></div>
+            <div class="col-2 border  text-center"><b> Discount</b></div>
+            <div class="col-2 border  text-center"><b> Final Price</b></div>
+        </div>
+        <div class="row" id="result">
+
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        let data = [
+            {
+                "name": "t-shirt",
+                "price": 2000,
+                "discount": 70
+            },
+            {
+                "name": "shirt",
+                "price": 1200,
+                "description":"denim",
+                "discount": 10
+            },
+            {
+                "name": "Top",
+                "price": 200,
+                "discount": 0
+            },
+            {
+                "name": "Jeans",
+                "price": 2000,
+                "description":"mast he bhaila",
+                "discount": 20
+            },
+        ]
+        $(document).ready(() => {
+            // data.forEach((e)=> localStorage.setItem())
+            show();
+        })
+        function show() {
+           result.innerHTML="";
+
+            for (let index in data) {
+                result.innerHTML += `
+        <div class="col-2 border">${parseInt(index)+1}</div>
+        <div class="col-2 border">${data[index].name}</div>
+        <div class="col-2 border">${data[index].description??"<span class='text-muted'>N/a</span>"}</div>
+        <div class="col-2 border">${data[index].price}</div>
+        <div class="col-2 border">${data[index].discount}</div>
+        <div class="col-2 border">${data[index].price- data[index].price* data[index].discount/100}</div>
+        `;
+            }
+        }
+        function go(){
+            $('#insert').slideToggle(1000);
+        }
+        function save(){
+            let obj={
+                "name": names.value,
+                "price": price.value,
+                "description": description.value,
+                "discount": discount.value
+            };
+            data.push(obj);
+            names.value="";
+            price.value="";
+            description.value="";
+             discount.value = "";
+            fp.value="";
+
+            $('#insert').slideUp(1000,()=>{
+                //alert("Data Saved");
+                show();
+            });
+        }
+        function cal(){
+          fp.value=  price.value- price.value* discount.value/100;
+        }
+    </script>
+</body>
+
+</html>

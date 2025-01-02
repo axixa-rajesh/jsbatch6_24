@@ -1,17 +1,20 @@
+console.log( Boolean(""));
 
-let a = undefined;
-/*
-
-undefined
+// if (0) {
+//     console.log("true evaluated");
+    
+// }
+/* 
+which values are evaluated as false when implicit type coversion is in boolean(Note: We are not talking about comparision)
+undefine  
 null 
-bool 
-number
-bigInt 
-string 
-symbol
-........
-array 
-object
-function
-
+0
+"" '' ``
+0.0
 */
+// if ("Rajesh"==true) {
+//     console.log("Axixa");
+    
+// }
+// let x = "Ramu";
+// console.log(null==false);
